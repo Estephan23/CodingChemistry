@@ -7,14 +7,41 @@ using System.Text.Json;
 namespace CodingChemistry
 {
     internal class Program
-    { 
+    {
         static void Main(string[] args)
         {
             using PeriodicTableDataBase context = new PeriodicTableDataBase();
-            context.Elements.ExecuteDelete(); 
+            context.Elements.ExecuteDelete();
             SeedTheDataBase();
+            {
+                // Get user input on which element they want to see.
+                Console.WriteLine("Hello, welcome to Mr. Estephan's Coding Chemistry Program!\nPlease enter the symbol of the element you would like to learn about:");
+                string userInput = Console.ReadLine() ?? "";
+
+                // Get the element from the database.
+                Element? E = context.Elements.FromSqlRaw($"SELECT * FROM Elements WHERE Symbol = '{userInput}'").SingleOrDefault();
+
+                // Print information regarding the element to the console.
+                Console.WriteLine("The element you selected is " + E?.Name + ". " + E?.Name + " has an atomic number of " + E?.AtomicNumber + ".  An atomic number of " + E?.AtomicNumber + " means it contains " + E?.AtomicNumber + " protons.  Protons are a subatomic particle that contain a positive(+) charge.  The number of protons in an element is what makes an element unique.  Only " + E?.Name + " contains exactly " + E.AtomicNumber + " protons in the Periodic Table.");
+                
+                Console.WriteLine("\nPress 1 to learn about the location of " + E?.Name + " on the Periodic Table.");
+                Console.WriteLine("Press 'exit' to quit.");
+
+                while (userInput.ToLower() != "exit")
+                {
+                    if (userInput == "1")
+                    {
+                        Console.WriteLine("The atomic mass for" + E.Name + "is" + E.AtomicMass);
+                        Console.WriteLine("The atomic mass of an element is in amu, atomic mass units.  The atomic mass consisted of the mass of all the protons and neutrons in that element.");
+                        Console.WriteLine("The atomic mass tells us the number of protons and neutrons in an element. In this case, since " + E.Name + " has " + E.AtomicNumber + " of protons, that means if you subtract the" + E.AtomicNumber + "from, the " + E.AtomicMass + "you will get the number of neturons, after you round to the neatest whole number.");
+                    }
+
+                    Console.WriteLine("Type 'exit' to quit.");
+                    userInput = Console.ReadLine();
+                }
+            }
         }
-        private static void SeedTheDataBase() 
+        private static void SeedTheDataBase()
         {
             //create the destination/recipient list of elements.
             List<Element> listOfElements = new List<Element>();
