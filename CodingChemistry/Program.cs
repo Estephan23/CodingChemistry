@@ -39,35 +39,44 @@ namespace CodingChemistry
                     Console.WriteLine("\n\n\nPress 1 to learn about the Atomic Mass of " + E?.Name + " .");
                     Console.WriteLine("Press 2 to learn about the location of " + E?.Name + " and the type of element it is.");
                     Console.WriteLine("Press 3 to learn about the electron configuration of " + E?.Name);
+                    Console.WriteLine("\nPress 'exit' to quit.");
                     userInput = Console.ReadLine() ?? "";
-                    //Console.WriteLine("\nPress 'exit' to quit.");
+                    
                 }
-           
+
                 while (userInput.ToLower() != "exit")
                 {
                     if (userInput == "1")
                     {
-                        
-                        Console.WriteLine("The atomic mass for " + E.Name + " is " + E.AtomicMass);
-                        Console.WriteLine("The atomic mass of an element is in amu, atomic mass units.  The atomic mass consists of the mass of all the protons and neutrons in that element.");
+                        Console.WriteLine("\nThe atomic mass for " + E.Name + " is " + E.AtomicMass + "." + " The atomic mass of an element is in amu, atomic mass units.  The atomic mass consists of the mass of all the protons and neutrons in that element.");
+
                         Console.WriteLine("The atomic mass tells us the number of protons and neutrons in an element. In this case, since " + E.Name + " has " + E.AtomicNumber + " protons, that means if you subtract the " + E.AtomicNumber + " from, the " + E.AtomicMass + " you will get the number of neturons, after you round to the nearest whole number.");
+                        Console.WriteLine("\nPress 2 to learn about the location of " + E?.Name + " and the type of element it is.");
+                        Console.WriteLine("Press 3 to learn about the electron configuration of " + E?.Name);
+                        Console.WriteLine("Press 'exit' to quit.");
                     }
                     else if (userInput == "2")
                     {
-                        Console.WriteLine("Press 1 to learn about the Atomic mass of " + E?.Name + " .");
-                        Console.WriteLine("Press 2 to learn about the location of " + E?.Name + " and the type of element it is.");
+                        Console.WriteLine("\n\nThe location of " + E.Name + " can be found in Group " + E.Group + " and Period " + E.Period + ". The Group number is the numbered column on the Periodic Table, while the Period is the numbered row on the Periodic Table. " + E.Name + " is considered a " + E.GroupName + ".");
+                        Console.WriteLine("\n\nPress 1 to learn about the Atomic mass of " + E?.Name + " .");
                         Console.WriteLine("Press 3 to learn about the electron configuration of " + E?.Name);
+                        Console.WriteLine("Press 'exit' to quit.");
                     }
                     else if (userInput == "3")
                     {
                         Console.WriteLine("Press 1 to learn about the Atomic mass of " + E?.Name + " .");
                         Console.WriteLine("Press 2 to learn about the location of " + E?.Name + " and the type of element it is.");
                         Console.WriteLine("Press 3 to learn about the electron configuration of " + E?.Name);
+                        Console.WriteLine("Press 'exit' to quit.");
                     }
-                    
+
                     userInput = Console.ReadLine();
                 }
-                Console.WriteLine("\nPress 'exit' to quit.");
+                if (userInput.ToLower() == "exit") ;
+                {
+                    Console.WriteLine("Thanks for learning Chemistry with Mr. Estephan today!  Keep it classy!");
+                }
+               
 
             }
         }
