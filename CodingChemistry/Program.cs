@@ -21,63 +21,67 @@ namespace CodingChemistry
 
                 // Get the element from the database.
                 Element? Element = context.Elements.FromSqlRaw($"SELECT * FROM Elements WHERE Symbol = '{userInput}'").SingleOrDefault();
-                Element E = Element;
-
-                while (E == null)
+                
+                //Print the information below, if the user inputs a null value. 
+                while (Element == null)
                 {
-                    Console.WriteLine("\nUhoh! " + "'" + userInput + "'" + " is not an element.  Double check your spelling, capitalization and try again!");
+                    Console.WriteLine($"\nUhoh! {userInput} is not an element.  Double check your spelling, capitalization and try again!");
                    
                     Console.WriteLine("\nPlease enter the symbol of the element you would like to explore!");
                     userInput = Console.ReadLine() ?? "";
                     Element = context.Elements.FromSqlRaw($"SELECT * FROM Elements WHERE Symbol = '{userInput}'").SingleOrDefault();
-                    E = Element;
+                 
                 }
                 // Print information regarding the element to the console.
-                if (E != null)
+                if (Element != null)
                 {
-                    Console.WriteLine("\nThe element you selected is " + E?.Name + ". " + E?.Name + " has an atomic number of " + E?.AtomicNumber + ".  An atomic number of " + E?.AtomicNumber + " means it contains " + E?.AtomicNumber + " protons.  Protons are subatomic particles that are located in the nucleus of  atom and contain a positive(+) charge.  The number of protons in an element is what makes an element unique.  Only " + E?.Name + " contains exactly " + E.AtomicNumber + " protons.");
-                    Console.WriteLine("\n\n\nPress 1 to learn about the Atomic Mass of " + E?.Name + " .");
-                    Console.WriteLine("Press 2 to learn about the location of " + E?.Name + " and the type of element it is.");
-                    Console.WriteLine("Press 3 to learn about the electron configuration of " + E?.Name);
-                    Console.WriteLine("\nPress 'exit' to quit.");
-                    userInput = Console.ReadLine() ?? "";
-                    
+                    Console.WriteLine($"\nThe element you selected is {Element?.Name}. {Element?.Name} has an atomic number of {Element?.AtomicNumber}.  An atomic number of {Element?.AtomicNumber} means it contains {Element?.AtomicNumber} protons and electrons.  Protons are subatomic particles that are located in the nucleus of  atom and contain a positive(+) charge, and electrons are subatomic particles that orbit outside the nucleus and contain a negative(-) charge.  The number of protons in an element is what makes an element unique.  Only {Element?.Name} contains exactly {Element.AtomicNumber} protons.");
+                    Console.WriteLine($"\n\n\nPress 1 to learn about the Atomic Mass of {Element?.Name}.");
+                    Console.WriteLine($"Press 2 to learn about the location of {Element?.Name} and the type of element it is.");
+                    Console.WriteLine($"Press 3 to learn about the electron configuration of {Element?.Name}");
+                    Console.WriteLine("\n Type 'exit' to quit.");
+                    userInput = Console.ReadLine() ?? "";     
                 }
-
+               
                 while (userInput.ToLower() != "exit")
                 {
                     if (userInput == "1")
                     {
-                        Console.WriteLine("\nThe atomic mass for " + E.Name + " is " + E.AtomicMass + "." + " The atomic mass of an element is in amu, atomic mass units.  The atomic mass consists of the mass of all the protons and neutrons in that element.");
-
-                        Console.WriteLine("The atomic mass tells us the number of protons and neutrons in an element. In this case, since " + E.Name + " has " + E.AtomicNumber + " protons, that means if you subtract the " + E.AtomicNumber + " from, the " + E.AtomicMass + " you will get the number of neturons, after you round to the nearest whole number.");
-                        Console.WriteLine("\nPress 2 to learn about the location of " + E?.Name + " and the type of element it is.");
-                        Console.WriteLine("Press 3 to learn about the electron configuration of " + E?.Name);
-                        Console.WriteLine("Press 'exit' to quit.");
+                        Console.WriteLine($"\nThe atomic mass for {Element.Name} is {Element.AtomicMass}. The atomic mass of an element is in amu, atomic mass units.  The atomic mass consists of the mass of all the protons and neutrons in that element.");
+                        Console.WriteLine($"The number of neutrons for {Element.Name} is {Element.Neutrons}");
+                        Console.WriteLine($"\nPress 2 to learn about the location of {Element?.Name} and the type of element it is.");
+                        Console.WriteLine($"Press 3 to learn about the electron configuration of {Element?.Name}");
+                        Console.WriteLine("Press 4 to explore another element.");
+                        Console.WriteLine("Type 'exit' to quit.");
                     }
                     else if (userInput == "2")
                     {
-                        Console.WriteLine("\n\nThe location of " + E.Name + " can be found in Group " + E.Group + " and Period " + E.Period + ". The Group number is the numbered column on the Periodic Table, while the Period is the numbered row on the Periodic Table. " + E.Name + " is considered a " + E.GroupName + ".");
-                        Console.WriteLine("\n\nPress 1 to learn about the Atomic mass of " + E?.Name + " .");
-                        Console.WriteLine("Press 3 to learn about the electron configuration of " + E?.Name);
-                        Console.WriteLine("Press 'exit' to quit.");
+                        Console.WriteLine($"\n\nThe location of {Element.Name} can be found in Group {Element.Group} and Period {Element.Period}. The Group number is the numbered column on the Periodic Table, while the Period is the numbered row on the Periodic Table. {Element.Name} is considered a {Element.GroupName}.");
+                        Console.WriteLine($"\n\nPress 1 to learn about the Atomic mass of {Element?.Name}.");
+                        Console.WriteLine($"Press 3 to learn about the electron configuration of {Element?.Name}");
+                        Console.WriteLine("Press 4 to explore another element.");
+                        Console.WriteLine("Type 'exit' to quit.");
                     }
                     else if (userInput == "3")
                     {
-                        Console.WriteLine("Press 1 to learn about the Atomic mass of " + E?.Name + " .");
-                        Console.WriteLine("Press 2 to learn about the location of " + E?.Name + " and the type of element it is.");
-                        Console.WriteLine("Press 3 to learn about the electron configuration of " + E?.Name);
-                        Console.WriteLine("Press 'exit' to quit.");
+                        Console.Write($"The electron configuration for {Element?.Name} is {Element.ElectronConfiguration} and the abbreviated electron configuration for {Element?.Name} is {Element?.AbbreviatedElectronConfiguration}. Notice the element in [], it is the noble gas closest to {Element.Name}.");
+                        Console.WriteLine($"\n\n\nPress 1 to learn about the Atomic mass of {Element?.Name}.");
+                        Console.WriteLine($"Press 2 to learn about the location of {Element?.Name} and the type of element it is.");
+                        Console.WriteLine("Press 4 to explore another element.");
+                        Console.WriteLine("Type 'exit' to quit.");
                     }
-
+                    else if (userInput == "4")
+                    {
+                        Console.WriteLine("\nPlease enter the symbol of the element you would like to explore!");
+                        userInput = Console.ReadLine() ?? "";
+                        Element = context.Elements.FromSqlRaw($"SELECT * FROM Elements WHERE Symbol = '{userInput}'").SingleOrDefault();
+                    }
                     userInput = Console.ReadLine();
                 }
                 if (userInput.ToLower() == "exit") ;
                 {
                     Console.WriteLine("Thanks for learning Chemistry with Mr. Estephan today!  Keep it classy!");
                 }
-               
-
             }
         }
         private static void SeedTheDataBase()

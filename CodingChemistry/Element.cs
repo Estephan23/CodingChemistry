@@ -14,6 +14,7 @@ public class Element
     public string ElectronConfiguration { get; set; }
     public string AbbreviatedElectronConfiguration { get; set; }
     public float? Electronegativity { get; set; }
+    public int Neutrons => (int)Math.Round(AtomicMass) - AtomicNumber;  //S in solid principle
    
 }
 
