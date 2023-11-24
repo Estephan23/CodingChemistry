@@ -63,7 +63,7 @@ namespace CodingChemistry
                     }
                     else if (userInput == "3")
                     {
-                        Console.Write($"\n\nThe electron configuration for {Element?.Name} is {Element.ElectronConfiguration} and the abbreviated electron configuration for {Element?.Name} is {Element?.AbbreviatedElectronConfiguration}. Notice the element in brackcets []. That is the noble gas closest to {Element.Name}.");
+                        Console.Write($"\n\nThe electron configuration for {Element?.Name} is {Element.ElectronConfiguration} and the abbreviated electron configuration for {Element?.Name} is {Element?.AbbreviatedElectronConfiguration}. Notice the element in brackets []. That is the noble gas closest to {Element.Name}.");
                         Console.WriteLine($"\n\n\nPress 1 to learn about the Atomic mass of {Element?.Name}.");
                         Console.WriteLine($"Press 2 to learn about {Element?.Name}'s groupname and its location on the Periodic Table.");
                         Console.WriteLine("Press 4 to explore another element.");
