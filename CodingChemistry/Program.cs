@@ -16,7 +16,7 @@ namespace CodingChemistry
             SeedTheDataBase();
             {
                 // Get user input on which element they want to see.
-                Console.WriteLine("Hello, welcome to Mr. Estephan's 'Coding Chemistry' Program!\n\nPlease enter the symbol of the element you would like to explore!");
+                Console.WriteLine("Welcome to Mr. Estephan's 'Coding Chemistry' Program!\n\nPlease enter the symbol of the element you would like to explore!");
                 string userInput = Console.ReadLine() ?? "";
 
                 // Get the element from the database.
@@ -55,7 +55,7 @@ namespace CodingChemistry
                     }
                     else if (userInput == "2")
                     {
-                        Console.WriteLine($"\n\nThe location of {Element.Name} can be found in Group {Element.Group} and Period {Element.Period}. The Group number is the numbered column on the Periodic Table, while the Period is the numbered row on the Periodic Table. Also, {Element.Name} is considered a {Element.GroupName}.");
+                        Console.WriteLine($"\n\nThe location of {Element.Name} can be found in Group {Element.Group} and Period {Element.Period} on the Periodic Table. An element's group number is the numbered column its in on the Periodic Table, while the Period is the numbered row on the Periodic Table. Also, {Element.Name} is considered a {Element.GroupName}.");
                         Console.WriteLine($"\n\nPress 1 to learn about the Atomic mass of {Element?.Name}.");
                         Console.WriteLine($"Press 3 to learn about the electron configuration of {Element?.Name}");
                         //Console.WriteLine("Press 4 to explore another element.");
@@ -66,7 +66,7 @@ namespace CodingChemistry
                         Console.Write($"\n\nThe electron configuration for {Element?.Name} is {Element.ElectronConfiguration} and the abbreviated electron configuration for {Element?.Name} is {Element?.AbbreviatedElectronConfiguration}. Notice the element in brackets []. That is the noble gas closest to {Element.Name}.");
                         Console.WriteLine($"\n\n\nPress 1 to learn about the Atomic mass of {Element?.Name}.");
                         Console.WriteLine($"Press 2 to learn about {Element?.Name}'s groupname and its location on the Periodic Table.");
-                        Console.WriteLine("Press 4 to explore another element.");
+                        //Console.WriteLine("Press 4 to explore another element.");
                         Console.WriteLine("Type 'exit' to quit.");
                     }
                     //else if (userInput == "4")
