@@ -1,10 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using SQLitePCL;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace CodingChemistry
 {
@@ -13,14 +16,16 @@ namespace CodingChemistry
         static void Main(string[] args)
         {
             using PeriodicTableDataBase context = new PeriodicTableDataBase();
-            context.Elements.ExecuteDelete();
-            SeedTheDataBase();
+            //context.Elements.ExecuteDelete();
+            //SeedTheDataBase();
             {
                 // Get user input on which element they want to see.
                 Console.WriteLine("Welcome to Mr. Estephan's 'Coding Chemistry' Program!\n\nPlease enter the symbol of the element you would like to explore!");
                 string userInput = Console.ReadLine() ?? "";
 
-                // Get the element from the database.
+                //Feature Requirement #1 Query your database using araw SQL query, not EF
+
+                // Get the element from the database. 
                 Element? Element = context.Elements.FromSqlRaw($"SELECT * FROM Elements WHERE Symbol = '{userInput}'").SingleOrDefault();
                 
                 //Print the information below, if the user inputs a null value. 
@@ -105,7 +110,7 @@ namespace CodingChemistry
                 }
             }
         }
-        private static void SeedTheDataBase()
+        private static void SeedTheDataBase()  //Feature Requirement #2 Create a dictionary or list,populate it with severalvalues, retrieve at least onevalue, and use it in yourprogram
         {
             //create the destination/recipient list of elements.
             List<Element> listOfElements = new List<Element>();
