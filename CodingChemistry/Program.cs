@@ -54,7 +54,7 @@ namespace CodingChemistry
                 {
                     if (userInput == "1")
                     {
-                        Console.WriteLine($"\n\nThe atomic mass for {Element.Name} is {Element.AtomicMass}amu.  The unit 'amu' stands for atomic mass units.  The atomic mass is the mass of all the protons and neutrons in that element.  Since the number of protons in {Element.Name} is {Element.AtomicNumber}, the number of neutrons is {Element.Neutrons}.");
+                        Console.WriteLine($"\n\nThe atomic mass for {Element.Name} is {Element.AtomicMass}amu.  The unit 'amu' stands for atomic mass units.  The atomic mass is the mass of all the protons and neutrons in that element.  Since the number of protons in {Element.Name} is {Element.AtomicNumber}, the number of neutrons is {Element.CalculateNeutrons}."); 
                         Console.WriteLine($"\nPress 1 to learn about the Atomic Mass of {Element?.Name}.");
                         Console.WriteLine($"Press 2 to learn about {Element?.Name}'s groupname and its location on the Periodic Table.");
                         Console.WriteLine($"Press 3 to learn about the electron configuration of {Element?.Name}");
