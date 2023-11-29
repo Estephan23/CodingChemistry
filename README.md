@@ -12,7 +12,8 @@ This program boasts three key features:
 
 -Query your database using raw SQL queries (not EF).
 -Create and populate a list with various values, retrieving at least one value to utilize in your program.
--Employ the SOLID principle, among other best practices!
+-Implement a regular expression (regex) to ensure a field either a phone number or an email address is always stored and displayed in the same format, 
+...among other best practices!
 
 Your time and interest in exploring my work are greatly appreciated. I trust this program aligns with your expectations. 
 
