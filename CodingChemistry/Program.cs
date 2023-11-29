@@ -26,25 +26,25 @@ namespace CodingChemistry
                 //Feature Requirement #1 Query your database using araw SQL query, not EF
 
                 // Get the element from the database. 
-                Element? Element = context.Elements.FromSqlRaw($"SELECT * FROM Elements WHERE Symbol = '{userInput}'").SingleOrDefault();
+                Element? element = context.Elements.FromSqlRaw($"SELECT * FROM Elements WHERE Symbol = '{userInput}'").SingleOrDefault();
                 
                 //Print the information below, if the user inputs a null value. 
-                while (Element == null)
+                while (element == null)
                 {
                     Console.WriteLine($"\nUhoh! {userInput} is not an element.  Double check your spelling, capitalization and try again!");
                    
                     Console.WriteLine("\nPlease enter the symbol of the element you would like to explore!");
                     userInput = Console.ReadLine() ?? "";
-                    Element = context.Elements.FromSqlRaw($"SELECT * FROM Elements WHERE Symbol = '{userInput}'").SingleOrDefault();
+                    element = context.Elements.FromSqlRaw($"SELECT * FROM Elements WHERE Symbol = '{userInput}'").SingleOrDefault();
                  
                 }
                 // Print information regarding the element to the console.
-                if (Element != null)
+                if (element != null)
                 {
-                    Console.WriteLine($"\nThe element you selected is {Element?.Name}. {Element?.Name} has an atomic number of {Element?.AtomicNumber}.  An atomic number of {Element?.AtomicNumber} means it contains {Element?.AtomicNumber} protons and electrons.  Protons are subatomic particles that are located in the nucleus of the atom and contain a positive(+) charge. Electrons are subatomic particles that orbit outside the nucleus and contain a negative(-) charge.  The number of protons in an element is what makes an element unique.  Only {Element?.Name} contains exactly {Element.AtomicNumber} protons.");
-                    Console.WriteLine($"\n\n\nPress 1 to learn about the Atomic Mass of {Element?.Name}.");
-                    Console.WriteLine($"Press 2 to learn about {Element?.Name}'s groupname and its location on the Periodic Table.");
-                    Console.WriteLine($"Press 3 to learn about the electron configuration of {Element?.Name}.");
+                    Console.WriteLine($"\nThe element you selected is {element?.Name}. {element?.Name} has an atomic number of {element?.AtomicNumber}.  An atomic number of {element?.AtomicNumber} means it contains {element?.AtomicNumber} protons and electrons.  Protons are subatomic particles that are located in the nucleus of the atom and contain a positive(+) charge. Electrons are subatomic particles that orbit outside the nucleus and contain a negative(-) charge.  The number of protons in an element is what makes an element unique.  Only {element?.Name} contains exactly {element.AtomicNumber} protons.");
+                    Console.WriteLine($"\n\n\nPress 1 to learn about the Atomic Mass of {element?.Name}.");
+                    Console.WriteLine($"Press 2 to learn about {element?.Name}'s groupname and its location on the Periodic Table.");
+                    Console.WriteLine($"Press 3 to learn about the electron configuration of {element?.Name}.");
                     Console.WriteLine("Press 4 to explore another element.");
                     Console.WriteLine("\n Type 'exit' to quit.");
                     userInput = Console.ReadLine() ?? "";     
@@ -54,25 +54,21 @@ namespace CodingChemistry
                 {
                     if (userInput == "1")
                     {
-                        Console.WriteLine($"\n\nThe atomic mass for {Element.Name} is {Element.AtomicMass}amu.  The unit 'amu' stands for atomic mass units.  The atomic mass is the mass of all the protons and neutrons in that element.  Since the number of protons in {Element.Name} is {Element.AtomicNumber}, the number of neutrons is {Element.CalculateNeutrons}."); 
-                        Console.WriteLine($"\nPress 1 to learn about the Atomic Mass of {Element?.Name}.");
-                        Console.WriteLine($"Press 2 to learn about {Element?.Name}'s groupname and its location on the Periodic Table.");
-                        Console.WriteLine($"Press 3 to learn about the electron configuration of {Element?.Name}");
-                        Console.WriteLine("Press 4 to explore another element.");
-                        Console.WriteLine("Type 'exit' to quit.");
+                        PrintUserInputOption1(element);
+                        
                     }
                     else if (userInput == "2")
                     {
-                        Console.WriteLine($"\n\nThe location of {Element.Name} can be found in Group {Element.Group} and Period {Element.Period} on the Periodic Table. An element's group number is the numbered column its in on the Periodic Table, while the Period is the numbered row on the Periodic Table. Also, {Element.Name} is considered a {Element.GroupName}.");
-                        Console.WriteLine($"\nPress 1 to learn about the Atomic mass of {Element?.Name}.");
-                        Console.WriteLine($"Press 2 to learn about {Element?.Name}'s groupname and its location on the Periodic Table.");
-                        Console.WriteLine($"Press 3 to learn about the electron configuration of {Element?.Name}");
+                        Console.WriteLine($"\n\nThe location of {element.Name} can be found in Group {element.Group} and Period {element.Period} on the Periodic Table. An element's group number is the numbered column its in on the Periodic Table, while the Period is the numbered row on the Periodic Table. Also, {element.Name} is considered a {element.GroupName}.");
+                        Console.WriteLine($"\nPress 1 to learn about the Atomic mass of {element?.Name}.");
+                        Console.WriteLine($"Press 2 to learn about {element?.Name}'s groupname and its location on the Periodic Table.");
+                        Console.WriteLine($"Press 3 to learn about the electron configuration of {element?.Name}");
                         Console.WriteLine("Press 4 to explore another element.");
                         Console.WriteLine("Type 'exit' to quit.");
                     }
                     else if (userInput == "3")
                     {
-                        var elementString = Element.AbbreviatedElectronConfiguration;
+                        var elementString = element.AbbreviatedElectronConfiguration;
                         var regexMatch = Regex.Match(elementString, @"\[(.*)\].*");
                         if (regexMatch.Groups.Count == 2)
                         {
@@ -82,10 +78,10 @@ namespace CodingChemistry
                         {
                             Console.WriteLine("Element symbol not found");
                         }
-                        Console.Write($"\n\nThe electron configuration for {Element?.Name} is {Element.ElectronConfiguration} and the abbreviated electron configuration for {Element?.Name} is {Element?.AbbreviatedElectronConfiguration}. Notice the element in brackets [] is {regexMatch.Groups[1].Value}. That is the noble gas closest to {Element.Name}.");
-                        Console.WriteLine($"\n\nPress 1 to learn about the Atomic mass of {Element?.Name}.");
-                        Console.WriteLine($"Press 2 to learn about {Element?.Name}'s groupname and its location on the Periodic Table.");
-                        Console.WriteLine($"Press 3 to learn about the electron configuration of {Element?.Name}.");
+                        Console.Write($"\n\nThe electron configuration for {element?.Name} is {element.ElectronConfiguration} and the abbreviated electron configuration for {element?.Name} is {element?.AbbreviatedElectronConfiguration}. Notice the element in brackets [] is {regexMatch.Groups[1].Value}. That is the noble gas closest to {element.Name}.");
+                        Console.WriteLine($"\n\nPress 1 to learn about the Atomic mass of {element?.Name}.");
+                        Console.WriteLine($"Press 2 to learn about {element?.Name}'s groupname and its location on the Periodic Table.");
+                        Console.WriteLine($"Press 3 to learn about the electron configuration of {element?.Name}.");
                         Console.WriteLine("Press 4 to explore another element.");
                         Console.WriteLine("Type 'exit' to quit.");
                     }
@@ -93,11 +89,11 @@ namespace CodingChemistry
                     {
                         Console.WriteLine("\n\nPlease enter the symbol of the element you would like to explore!");
                         userInput = Console.ReadLine() ?? "";
-                        Element = context.Elements.FromSqlRaw($"SELECT * FROM Elements WHERE Symbol = '{userInput}'").SingleOrDefault();
-                        Console.WriteLine($"\n\nNow lets learn about the element {Element.Name}! {Element?.Name} has an atomic number of {Element?.AtomicNumber}.  An atomic number of {Element?.AtomicNumber} means it contains {Element?.AtomicNumber} protons and electrons.  Protons are subatomic particles that are located in the nucleus of the atom and contain a positive(+) charge. Electrons are subatomic particles that orbit outside the nucleus and contain a negative(-) charge.  The number of protons in an element is what makes an element unique.  Only {Element?.Name} contains exactly {Element.AtomicNumber} protons.\");\r\n");
-                        Console.WriteLine($"Press 1 to learn about the Atomic Mass of {Element?.Name}.");
-                        Console.WriteLine($"Press 2 to learn about {Element?.Name}'s groupname and its location on the Periodic Table.");
-                        Console.WriteLine($"Press 3 to learn about the electron configuration of {Element?.Name}.");
+                        element = context.Elements.FromSqlRaw($"SELECT * FROM Elements WHERE Symbol = '{userInput}'").SingleOrDefault();
+                        Console.WriteLine($"\n\nNow lets learn about the element {element.Name}! {element?.Name} has an atomic number of {element?.AtomicNumber}.  An atomic number of {element?.AtomicNumber} means it contains {element?.AtomicNumber} protons and electrons.  Protons are subatomic particles that are located in the nucleus of the atom and contain a positive(+) charge. Electrons are subatomic particles that orbit outside the nucleus and contain a negative(-) charge.  The number of protons in an element is what makes an element unique.  Only {element?.Name} contains exactly {element.AtomicNumber} protons.\");\r\n");
+                        Console.WriteLine($"Press 1 to learn about the Atomic Mass of {element?.Name}.");
+                        Console.WriteLine($"Press 2 to learn about {element?.Name}'s groupname and its location on the Periodic Table.");
+                        Console.WriteLine($"Press 3 to learn about the electron configuration of {element?.Name}.");
                         Console.WriteLine("Press 4 to explore another element.");
                         Console.WriteLine("Type 'exit' to quit.");
 
@@ -124,7 +120,15 @@ namespace CodingChemistry
             //save changes to the context. 
             context.SaveChanges();
         }
-
+        private static void PrintUserInputOption1(Element element)
+        {
+            Console.WriteLine($"\n\nThe atomic mass for {element.Name} is {element.AtomicMass}amu.  The unit 'amu' stands for atomic mass units.  The atomic mass is the mass of all the protons and neutrons in that element.  Since the number of protons in {element.Name} is {element.AtomicNumber}, the number of neutrons is {element.CalculateNeutrons(element.AtomicMass, element.AtomicNumber)}.");
+            Console.WriteLine($"\nPress 1 to learn about the Atomic Mass of {element?.Name}.");
+            Console.WriteLine($"Press 2 to learn about {element?.Name}'s groupname and its location on the Periodic Table.");
+            Console.WriteLine($"Press 3 to learn about the electron configuration of {element?.Name}");
+            Console.WriteLine("Press 4 to explore another element.");
+            Console.WriteLine("Type 'exit' to quit.");
+        }
     }
 
 
@@ -143,5 +147,6 @@ namespace CodingChemistry
             optionsBuilder.UseSqlite($"Data Source={DbPath}");
         }
     }
+
 
 }
